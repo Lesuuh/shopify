@@ -1,8 +1,16 @@
+import { useLoaderData } from "react-router-dom";
+import Banner from "../components/Banner";
+import Products from "../components/Products";
 
 const Home = () => {
+  const data = useLoaderData();
+  console.log(data);
   return (
-    <div className="px-5 sm:px-8 lg:px-36">Home</div>
-  )
-}
+    <div>
+      <Banner />
+      <Products />
+    </div>
+  );
+};
 
-export default Home
+export default Home;
