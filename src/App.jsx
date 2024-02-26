@@ -30,7 +30,7 @@ function App() {
         {
           path: "/",
           element: <Home/>,
-          Loader : ProductsData
+          loader : ProductsData
         },
         {
           path: "/cart",

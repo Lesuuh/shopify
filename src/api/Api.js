@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 const ProductsData = () => {
-  const [productsData, setProductsData] = useState([]);
-
+  const [ProductsData, setProductsData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -17,8 +16,7 @@ const ProductsData = () => {
     };
     fetchData();
   }, []);
-
-  return productsData; // Return the fetched data
+  return ProductsData;
 };
 
 export default ProductsData;
