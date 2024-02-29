@@ -4,7 +4,6 @@ import Products from "../components/Products";
 
 const Home = () => {
   const data = useLoaderData();
-  console.log(data);
   return (
     <div>
       <Banner />

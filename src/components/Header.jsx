@@ -10,9 +10,13 @@ import {
   GrCart,
   FaShopware,
 } from "../assets/index";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [menu, setMenu] = useState(false);
+
+  const productData = useSelector((state) => state.bazaar.productData);
 
   const toggleMenu = () => {
     setMenu(!menu);
@@ -20,10 +24,12 @@ const Header = () => {
   return (
     <div className="w-full px-5 h-20 bg-white border-b-[1px] border-bg-gray-800 font">
       <div className=" max-w-screen-lg mx-auto h-full flex items-center justify-between">
-        <div className="text-black font-bold text-xl flex items-center cursor-pointer">
-          <FaShopware className=" text-xl" />
-          Shopify
-        </div>
+        <Link to="/">
+          <div className="text-black font-bold text-xl flex items-center cursor-pointer">
+            <FaShopware className=" text-xl" />
+            Shopify
+          </div>
+        </Link>
         {/* navlinks */}
         <div className="flex flex-row justify-between items-start md:block">
           <ul
@@ -61,7 +67,7 @@ const Header = () => {
             <div className="hidden relative sm:flex items-center">
               <GrCart className="text-xl" />
               <span className="absolute right-0 bottom-2/4 text-red-700 font-semibold text-sm">
-                0
+                {productData.length}
               </span>
             </div>
             <div>

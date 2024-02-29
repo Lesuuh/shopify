@@ -9,7 +9,8 @@ import {
 } from "react-router-dom";
 import Shop from "./pages/Shop";
 import Footer from "./components/Footer";
-import ProductsData from "./api/Api";
+import productsData from "./api/Api";
+import Product from "./components/Product";
 
 function App() {
   const Layout = () => {
@@ -30,7 +31,11 @@ function App() {
         {
           path: "/",
           element: <Home/>,
-          loader : ProductsData
+          loader : productsData
+        },
+        {
+          path: "/products/:id",
+          element: <Product/>
         },
         {
           path: "/cart",

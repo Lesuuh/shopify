@@ -1,8 +1,19 @@
+import { useSelector } from "react-redux";
 
 const Cart = () => {
-  return (
-    <div>Cart</div>
-  )
-}
+  const productData = useSelector((state) => state.bazaar.productData);
 
-export default Cart
+  return (
+    <div>
+      {productData.map((cartItem) => {
+        return (
+          <div key={cartItem._id}>
+            <img src={cartItem.image} alt="" />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default Cart;
