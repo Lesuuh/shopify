@@ -3,6 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../redux/bazaarSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const ProductCard = ({ product }) => {
               <p className="font-semibold ">${product.price}</p>
             </div>
             <p
-              onClick={() =>
+              onClick={() => {
                 dispatch(
                   addToCart({
                     _id: product._id,
@@ -48,8 +49,9 @@ const ProductCard = ({ product }) => {
                     quantity: 1,
                     description: product.description,
                   })
-                )
-              }
+                );
+                toast.success(`${product.title} is added to cart`);
+              }}
               className="absolute z-20 w-[100px] top-0 right-0 font-semibold text-sm text-gray-500 hover:text-red-950 transform -translate-x-32  group-hover:translate-x-0 transition-transform duration-500 cursor-pointer"
             >
               Add to Cart{" "}
@@ -64,6 +66,15 @@ const ProductCard = ({ product }) => {
           {product.isNew && <div>New</div>}
         </div>
       </div>
+      <ToastContainer
+        position="top-left"
+        pauseOnFocusLoss
+        pauseOnHover
+        hideProgressBar={false}
+        autoClose={3000}
+        closeOnClick
+        theme="dark"
+      />
     </div>
   );
 };
@@ -71,7 +82,7 @@ const ProductCard = ({ product }) => {
 // Define propTypes for ProductCard
 ProductCard.propTypes = {
   product: PropTypes.shape({
-  _id: PropTypes.number.isRequired,
+    _id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

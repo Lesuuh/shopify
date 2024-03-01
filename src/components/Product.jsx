@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/bazaarSlice";
+import { ToastContainer, toast } from "react-toastify";
 const Product = () => {
   const [details, setDetails] = useState({});
+  const [baseQty, setBaseQty] = useState(1);
   const Location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setDetails(Location.state.item);
@@ -63,12 +67,39 @@ const Product = () => {
           <div className="flex border-[1px] rounded-xl px-4 py-2 gap-10">
             <p className="text-gray-500 text-sm">Quantity</p>
             <div className="flex gap-2">
-              <button className="bg-gray-200 px-2 hover:bg-gray-300">-</button>
-              {0}
-              <button className="bg-gray-200 px-2 hover:bg-gray-300">+</button>
+              <button
+                onClick={() =>
+                  setBaseQty(baseQty === 1 ? baseQty : baseQty - 1)
+                }
+                className="bg-gray-200 px-2 hover:bg-gray-300"
+              >
+                -
+              </button>
+              <span>{baseQty}</span>
+              <button
+                onClick={() => setBaseQty(baseQty + 1)}
+                className="bg-gray-200 px-2 hover:bg-gray-300"
+              >
+                +
+              </button>
             </div>
           </div>
-          <button className="bg-gray-900 px-4 py-2 text-white font-semibold rounded-xl hover:bg-gray-950">
+          <button
+            onClick={() => {
+              dispatch(
+                addToCart({
+                  _id: details._id,
+                  title: details.title,
+                  image: details.image,
+                  price: details.price,
+                  quantity: baseQty,
+                  description: details.description,
+                })
+              );
+              toast.success(`${details.title} added to cart`);
+            }}
+            className="bg-gray-900 px-4 py-2 text-white font-semibold rounded-xl hover:bg-gray-950"
+          >
             Add to Cart
           </button>
         </div>
@@ -76,6 +107,18 @@ const Product = () => {
           <h3 className="text-gray-500">Category: {details.category}</h3>
         </div>
       </div>
+      <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };

@@ -37,10 +37,10 @@ const Header = () => {
               menu ? "left-[0]" : "left-[-100%]"
             } duration-700 px-10 py-10 sm:left-0`}
           >
-            <li className="transform hover:translate-x-2  flex items-center justify-center gap-1 text-base text-white sm:text-black font-semibold hover:text-orange-800 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duraion-300">
+            <Link to="/"><li className="transform hover:translate-x-2  flex items-center justify-center gap-1 text-base text-white sm:text-black font-semibold hover:text-orange-800 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duraion-300">
               <FaHome className="sm:hidden" />
               Home
-            </li>
+            </li></Link>
             <li className="transform hover:translate-x-2  flex items-center justify-center gap-1 text-base text-white sm:text-black  font-semibold hover:text-orange-800 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300">
               <FaBookOpen className="sm:hidden" />
               Pages
@@ -64,12 +64,13 @@ const Header = () => {
             >
               <IoClose />
             </div>
+            <Link to="/cart">
             <div className="hidden relative sm:flex items-center">
               <GrCart className="text-xl" />
               <span className="absolute right-0 bottom-2/4 text-red-700 font-semibold text-sm">
                 {productData.length}
               </span>
-            </div>
+            </div></Link>
             <div>
               <img
                 src=""
