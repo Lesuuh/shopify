@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const initialState = {
   productData: [],
   userInfo: null,
@@ -46,8 +45,22 @@ const bazaarSlice = createSlice({
         item.quantity--;
       }
     },
+    addUser: (state, action) => {
+      state.userInfo = action.payload;
+    },
+    removeUser: (state) => {
+      state.userInfo = null;
+    },
   },
 });
 
-export const { addToCart, deleteItem, resetCart, increment, decrement } = bazaarSlice.actions;
+export const {
+  addToCart,
+  deleteItem,
+  resetCart,
+  increment,
+  decrement,
+  addUser,
+  removeUser,
+} = bazaarSlice.actions;
 export default bazaarSlice.reducer;

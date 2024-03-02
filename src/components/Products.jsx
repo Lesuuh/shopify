@@ -16,7 +16,7 @@ const Products = ({ products }) => {
       </div>
       <div className="max-w-screen-xl mx-auto grid grid-cols-4 py-5 gap-5">
         {products.map((item) => {
-          return <ProductCard key={item} product={item} />;
+          return <ProductCard key={item.id} product={item} />;
         })}
       </div>
     </div>

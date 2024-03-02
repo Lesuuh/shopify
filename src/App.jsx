@@ -9,16 +9,19 @@ import {
 } from "react-router-dom";
 import Shop from "./pages/Shop";
 import Footer from "./components/Footer";
-import productsData from "./api/Api";
+import productsData from "./api/Api"; // Import ProductsData component
 import Product from "./components/Product";
+import Login from "./pages/Login";
+// import { useState, useEffect } from "react"; // Import useState and useEffect hooks
 
 function App() {
   const Layout = () => {
     return (
       <div>
         <Header />
-        <Outlet />
-        <Footer/>
+        {/* Pass productsData as prop to Outlet */}
+        <Outlet productsData={productsData} />
+        <Footer />
       </div>
     );
   };
@@ -30,28 +33,33 @@ function App() {
       children: [
         {
           path: "/",
-          element: <Home/>,
-          loader : productsData
+          element: <Home />,
+          loader: productsData,
         },
         {
           path: "/products/:id",
-          element: <Product/>
+          element: <Product />,
         },
         {
           path: "/cart",
-          element: <Cart/>
+          element: <Cart />,
         },
         {
           path: "/shop",
-          element: <Shop/>
-        }
+          element: <Shop />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
       ],
     },
   ]);
+
   return (
     <>
       <div className=" w-full h-[100dvh]">
-        <RouterProvider router={router}/>
+        <RouterProvider router={router} />
       </div>
     </>
   );

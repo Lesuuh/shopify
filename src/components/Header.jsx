@@ -17,30 +17,33 @@ const Header = () => {
   const [menu, setMenu] = useState(false);
 
   const productData = useSelector((state) => state.bazaar.productData);
+  const userInfo = useSelector((state) => state.bazaar.userInfo);
 
   const toggleMenu = () => {
     setMenu(!menu);
   };
   return (
-    <div className="w-full px-5 h-20 bg-white border-b-[1px] border-bg-gray-800 font">
-      <div className=" max-w-screen-lg mx-auto h-full flex items-center justify-between">
-        <Link to="/">
-          <div className="text-black font-bold text-xl flex items-center cursor-pointer">
+    <div className="w-full px-5 h-[70px] bg-white flex items-center border-b-[1px] border-bg-gray-800 font">
+      <div className="max-w-screen-xl mx-auto px-16 flex items-center justify-end w-full">
+        <Link to="/" className="flex items-center mr-auto">
+          <div className="font-semibold gap-1 flex items-center">
             <FaShopware className=" text-xl" />
             Shopify
           </div>
         </Link>
         {/* navlinks */}
-        <div className="flex flex-row justify-between items-start md:block">
+        <div className="flex items-center md:block">
           <ul
-            className={`flex flex-col items-start gap-10 sm:gap-7 sm:flex-row sm:relative absolute bg-gray-800 sm:bg-transparent w-[80%] h-full top-0 ${
+            className={`flex flex-col items-center gap-10 sm:gap-7 sm:flex-row sm:relative absolute bg-gray-800 sm:bg-transparent w-[80%] h-full top-0 ${
               menu ? "left-[0]" : "left-[-100%]"
-            } duration-700 px-10 py-10 sm:left-0`}
+            } duration-700 py-10 sm:left-0`}
           >
-            <Link to="/"><li className="transform hover:translate-x-2  flex items-center justify-center gap-1 text-base text-white sm:text-black font-semibold hover:text-orange-800 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duraion-300">
-              <FaHome className="sm:hidden" />
-              Home
-            </li></Link>
+            <Link to="/">
+              <li className="transform hover:translate-x-2  flex items-center justify-center gap-1 text-base text-white sm:text-black font-semibold hover:text-orange-800 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duraion-300">
+                <FaHome className="sm:hidden" />
+                Home
+              </li>
+            </Link>
             <li className="transform hover:translate-x-2  flex items-center justify-center gap-1 text-base text-white sm:text-black  font-semibold hover:text-orange-800 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300">
               <FaBookOpen className="sm:hidden" />
               Pages
@@ -65,19 +68,31 @@ const Header = () => {
               <IoClose />
             </div>
             <Link to="/cart">
-            <div className="hidden relative sm:flex items-center">
-              <GrCart className="text-xl" />
-              <span className="absolute right-0 bottom-2/4 text-red-700 font-semibold text-sm">
-                {productData.length}
-              </span>
-            </div></Link>
-            <div>
+              <div className="hidden relative sm:flex items-center">
+                <GrCart className="text-xl" />
+                <span className="absolute right-0 bottom-2/4 text-red-700 font-semibold text-sm">
+                  {productData.length}
+                </span>
+              </div>
+            </Link>
+            <Link to="/login">
+              <h3 className={`font-semibold ${userInfo ? "hidden" : "flex"}`}>
+                Login
+              </h3>
+            </Link>
+            <img
+              src={userInfo ? userInfo.image : ""}
+              alt=""
+              className="w-8 h-8 rounded-full"
+            />
+            {userInfo && <p>{userInfo.name.slice(0, 6)}</p>}
+            {/* <div>
               <img
                 src=""
                 className="w-8 h-8 rounded-full border-[1px]"
                 alt=""
               />
-            </div>
+            </div> */}
           </ul>
         </div>
         <div
