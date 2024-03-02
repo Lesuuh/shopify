@@ -2,10 +2,14 @@ import { useSelector } from "react-redux";
 import CartItems from "../components/CartItems";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import StripeCheckout from "react-stripe-checkout";
 
 const Cart = () => {
   const productData = useSelector((state) => state.bazaar.productData);
+  const userInfo = useSelector((state) => state.bazaar.productData);
   const [totalAmt, setTotalAmt] = useState(0);
+  const [proceedToPay, setProceedToPay] = useState(false);
 
   useEffect(() => {
     let price = 0;
@@ -15,6 +19,15 @@ const Cart = () => {
     });
     setTotalAmt(price.toFixed(2));
   }, [productData]);
+
+  // handle checkout
+  const handleCheckout = () => {
+    if (userInfo) {
+      setProceedToPay(true);
+    } else {
+      toast.error("Please Sign In to Proceed");
+    }
+  };
 
   return (
     <div>
@@ -43,9 +56,20 @@ const Cart = () => {
               <h3>Total:</h3>
               <h2 className="font-semibold">$ {totalAmt} </h2>
             </div>
-            <button className="bg-gray-950 text-white py-2 rounded-xl">
+            <button
+              onClick={handleCheckout}
+              className="bg-gray-950 text-white py-2 rounded-xl"
+            >
               Proceed to Checkout
             </button>
+            <div>
+              {proceedToPay && (
+                <p className="text-red-500 text-center font-semibold">
+                  N/B: Payment will be implemented by a payment gateway that is
+                  currently not integrated in this project
+                </p>
+              )}
+            </div>
           </div>
         </div>
       ) : (

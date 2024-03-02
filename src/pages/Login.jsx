@@ -30,9 +30,10 @@ const Login = () => {
             image: user.photoURL,
           })
         );
-        // setTimeout(() => {
-        //   // navigate("/");
-        // }, 2000);
+        setTimeout(() => {
+          navigate("/cart");
+        }, 3000);
+        toast.success("Logged in Successfully")
       })
       .catch((error) => {
         console.log("Error please", error);

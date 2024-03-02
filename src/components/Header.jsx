@@ -24,7 +24,7 @@ const Header = () => {
   };
   return (
     <div className="w-full px-5 h-[70px] bg-white flex items-center border-b-[1px] border-bg-gray-800 font">
-      <div className="max-w-screen-xl mx-auto px-16 flex items-center justify-end w-full">
+      <div className="max-w-screen-xl mx-auto h-[70px] px-16 flex items-center justify-end w-full">
         <Link to="/" className="flex items-center mr-auto">
           <div className="font-semibold gap-1 flex items-center">
             <FaShopware className=" text-xl" />
@@ -32,9 +32,9 @@ const Header = () => {
           </div>
         </Link>
         {/* navlinks */}
-        <div className="flex items-center md:block">
+        <div className="flex items-center h-[70px]  md:block">
           <ul
-            className={`flex flex-col items-center gap-10 sm:gap-7 sm:flex-row sm:relative absolute bg-gray-800 sm:bg-transparent w-[80%] h-full top-0 ${
+            className={`flex flex-col items-center gap-10 sm:gap-7 sm:flex-row sm:relative absolute bg-gray-800 sm:bg-transparent w-full h-full top-0 ${
               menu ? "left-[0]" : "left-[-100%]"
             } duration-700 py-10 sm:left-0`}
           >
@@ -80,12 +80,17 @@ const Header = () => {
                 Login
               </h3>
             </Link>
-            <img
-              src={userInfo ? userInfo.image : ""}
-              alt=""
-              className="w-8 h-8 rounded-full"
-            />
-            {userInfo && <p>{userInfo.name.slice(0, 6)}</p>}
+            <Link to="login">
+              <div className="flex items-center gap-1 -ml-8">
+                <img
+                  src={userInfo ? userInfo.image : ""}
+                  alt=""
+                  className="w-8 h-8 rounded-full"
+                />
+                {userInfo && <p className="flex ">{userInfo.name}</p>}
+              </div>
+            </Link>
+
             {/* <div>
               <img
                 src=""
